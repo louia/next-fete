@@ -1,6 +1,7 @@
-import { MantineProvider } from '@mantine/core';
+import { AppShell, MantineProvider } from '@mantine/core';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import FooterLink from '../components/footerLink';
 import Waves from '../components/waves';
 import '../styles/globals.css';
 
@@ -70,8 +71,19 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         }}
       >
-        <Waves />
-        <Component {...pageProps} />
+
+        <AppShell
+          padding="md"
+          footer={
+            <FooterLink />
+          }
+          styles={(theme) => ({
+            main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : '#ECF8F6' },
+          })}
+        >
+          <Waves />
+          <Component {...pageProps} />
+        </AppShell>
       </MantineProvider>
 
     </>

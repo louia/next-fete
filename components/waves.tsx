@@ -7,10 +7,11 @@ export default function Waves() {
             <div className={styles['background--custom']}>
                 <canvas id='canvas' className={styles.canvas} />
             </div>
+
             <Script strategy='beforeInteractive' src="https://cdn.jsdelivr.net/gh/greentfrapp/pocoloco@minigl/minigl.js" />
-            <Script strategy='lazyOnload'>
+            <Script>
                 var gradient = new Gradient();
-                gradient.initGradient("#canvas");
+                gradient.initGradient("#canvas");                
             </Script>
         </>
     );
