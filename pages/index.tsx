@@ -1,10 +1,30 @@
 
 import { Container, Grid, Space, Stack, Text, Title } from '@mantine/core';
-import FeteJour from '../components/feteDuJour';
+import { PrismaClient } from '@prisma/client';
 import InputBox from '../components/inputBox';
-import fetes from '../public/feteByPrenom.json';
 
-export default function Home() {
+export async function getServerSideProps() {
+  const prisma = new PrismaClient();
+
+  const fetes = await prisma.fete.findMany({
+    select: {
+      date: true,
+      fete_religieuse: true,
+      id: true,
+      prenom: true
+    }
+  });
+  const cleanedFetes = fetes.map((fete) => ({
+    ...fete,
+    fete_religieuse: fete.fete_religieuse?.toNumber(),
+    value: fete.id,
+    label: fete.prenom,
+  }));
+
+  return { props: { cleanedFetes } }
+}
+
+export default function Home({ cleanedFetes }) {
   return (
     <Container size="xl">
       <Grid grow gutter={100} align='center' style={{ height: '100vh' }}>
@@ -27,17 +47,11 @@ export default function Home() {
           </Stack>
         </Grid.Col>
         <Grid.Col span={7}>
-          <InputBox />
+          <InputBox fetes={cleanedFetes} />
           <Space h='md' />
-          <FeteJour />
+          {/* <FeteJour /> */}
         </Grid.Col>
       </Grid>
     </Container >
   )
-}
-
-export async function getStaticProps() {
-  return {
-    props: { fetes }, // will be passed to the page component as props
-  }
 }
