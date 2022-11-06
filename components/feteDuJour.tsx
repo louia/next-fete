@@ -1,11 +1,8 @@
 import { Badge, Card, Group, Space, Text } from "@mantine/core";
-import fetes from '../public/feteByDate.json';
 
-export default function FeteJour() {
+export default function FeteJour({fetesOfTheDay}) {
     const date = new Date();
-
-    const formatedDate = new Intl.DateTimeFormat('fr-FR').format(date) as keyof typeof fetes;
-    const fetesOfTheDay = fetes[formatedDate];
+    const formatedDate = new Intl.DateTimeFormat('fr-FR').format(date);
 
     return (
         <Card sx={(theme) => ({
@@ -14,11 +11,11 @@ export default function FeteJour() {
             boxShadow: theme.shadows.lg
         })}
         >
-            <Text>Aujourd'hui nous fêtons les :</Text>
+            <Text>Aujourd'hui nous sommes le {formatedDate} et nous fêtons les :</Text>
             <Space h='xs' />
             <Group spacing="xs">
                 {fetesOfTheDay.map((fete) =>
-                    <Badge key={fete.id}>{fete.pnom}</Badge>
+                    <Badge key={fete.id}>{fete.prenom}</Badge>
                 )}
             </Group>
         </Card>

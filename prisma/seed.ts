@@ -16,7 +16,7 @@ async function main() {
                     prenom: fete.pnom,
                     createdAt: date,
                     fete_religieuse: fete.majeur ? 1 : 0,
-                    date: key,
+                    date: key.substring(0,5),
                 }
             }));
         }

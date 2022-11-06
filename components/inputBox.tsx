@@ -1,15 +1,22 @@
 import { Button, Card, MultiSelect, Stack } from "@mantine/core";
-import { useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { Fete } from "../pages";
 
-export default function InputBox({ fetes }) {
-  const [value, setValue] = useState([]);
 
-  // useEffect(() => {
-  //     console.log(value);
-  //     value.map((e) => console.log(fetes[e]))
+interface Props {
+  children?: ReactNode,
+  fetes: Fete[]
+}
 
-  //   }, [value]);
-  // console.log(fetes);
+export default function InputBox({ fetes }: Props) {
+  const [value, setValue] = useState<Fete['value'][]>([]);
+
+  useEffect(() => {
+    for (const id of value) {
+      const find = fetes.find((fete) => fete.value === id);
+      console.log(id, find);
+    }
+  }, [value]);
 
 
   return (
@@ -24,8 +31,6 @@ export default function InputBox({ fetes }) {
         <MultiSelect
           value={value}
           onChange={setValue}
-          // valueComponent={({ id }) => id}
-          // itemComponent={({ prenom }) => prenom}
           data={fetes}
           label="Prénom"
           placeholder="Jean, Pierre, Lucas, Hugo"
@@ -36,6 +41,7 @@ export default function InputBox({ fetes }) {
           transition="pop-top-left"
           transitionTimingFunction="ease"
           clearable
+          aria-label="Prénom"
         />
         <Button color="sand.5" radius="lg" size="lg">
           Valider

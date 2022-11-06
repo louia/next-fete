@@ -1,33 +1,70 @@
 
 import { Container, Grid, Space, Stack, Text, Title } from '@mantine/core';
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
+import { ReactNode } from 'react';
+import FeteJour from '../components/feteDuJour';
 import InputBox from '../components/inputBox';
+
+export type Fete = Pick<Prisma.feteSelect, "date" | "id" | "prenom"> & {
+  value: Prisma.feteSelect['id'],
+  label: Prisma.feteSelect['prenom'],
+  fete_religieuse: number
+}
 
 export async function getServerSideProps() {
   const prisma = new PrismaClient();
 
-  const fetes = await prisma.fete.findMany({
+  const allFetes = await prisma.fete.findMany({
     select: {
       date: true,
       fete_religieuse: true,
       id: true,
       prenom: true
+    },
+    orderBy: {
+      prenom: 'asc',
     }
   });
-  const cleanedFetes = fetes.map((fete) => ({
+  const cleanedFetes = allFetes.map((fete) => ({
     ...fete,
     fete_religieuse: fete.fete_religieuse?.toNumber(),
     value: fete.id,
     label: fete.prenom,
   }));
 
-  return { props: { cleanedFetes } }
+  const date = new Date();
+  const formatedDate = new Intl.DateTimeFormat('fr-FR').format(date).substring(0, 5);
+
+  const fetesOfTheDay = await prisma.fete.findMany({
+    where: {
+      date: formatedDate
+    },
+    select: {
+      prenom: true,
+      fete_religieuse: true,
+      id: true
+    },
+    orderBy: {
+      prenom: 'asc',
+    }
+  });
+  const cleanedFetesOfTheDay = fetesOfTheDay.map((fete) => ({
+    ...fete,
+    fete_religieuse: fete.fete_religieuse?.toNumber(),
+  }));
+
+  return { props: { cleanedFetes, cleanedFetesOfTheDay } }
 }
 
-export default function Home({ cleanedFetes }) {
+interface Props {
+  children?: ReactNode,
+  cleanedFetes: Fete[]
+}
+
+export default function Home({ cleanedFetes, cleanedFetesOfTheDay, ...props }: Props) {
   return (
-    <Container size="xl">
-      <Grid grow gutter={100} align='center' style={{ height: '100vh' }}>
+    <Container size="xl" style={{display: 'flex'}}>
+      <Grid justify={'space-between'} align={'center'} grow>
         <Grid.Col span={5}>
           <Stack spacing={'lg'}>
             <Title
@@ -46,12 +83,12 @@ export default function Home({ cleanedFetes }) {
             </Stack>
           </Stack>
         </Grid.Col>
-        <Grid.Col span={7}>
-          <InputBox fetes={cleanedFetes} />
-          <Space h='md' />
-          {/* <FeteJour /> */}
-        </Grid.Col>
-      </Grid>
-    </Container >
+      <Grid.Col span={7}>
+        <InputBox fetes={cleanedFetes} />
+        <Space h='md' />
+        <FeteJour fetesOfTheDay={cleanedFetesOfTheDay} />
+      </Grid.Col>
+    </Grid>
+    </Container>
   )
 }
