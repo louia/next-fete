@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model demande {
+  user_id Int
+  fete_id Int
+  fete    fete @relation(fields: [fete_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user    user @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([user_id, fete_id])
+}
+
+model fete {
+  id              Int       @id @unique(map: "sqlite_autoindex_fete_1") @default(autoincrement())
+  date            String
+  prenom          String
+  fete_religieuse Decimal?  @default(0)
+  createdAt       String?
+  demande         demande[]
+}
+
+model user {
+  id      Int       @id @unique(map: "sqlite_autoindex_user_1") @default(autoincrement())
+  email   String
+  demande demande[]
+}
