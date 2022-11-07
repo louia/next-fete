@@ -3,7 +3,7 @@
     height: 100vh;
     position: absolute;
     overflow: hidden;
-    z-index: -2;
+    z-index: 1;
     top: 0;
     left: 0;
 }

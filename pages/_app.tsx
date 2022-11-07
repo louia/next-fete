@@ -2,6 +2,7 @@ import { AppShell, MantineProvider } from '@mantine/core';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import FooterLink from '../components/footerLink';
+import Waves from '../components/waves';
 import '../styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -82,7 +83,7 @@ export default function App({ Component, pageProps }: AppProps) {
              },
           })}
         >
-          {/* <Waves /> */}
+          <Waves />
           <Component {...pageProps} />
         </AppShell>
       </MantineProvider>
