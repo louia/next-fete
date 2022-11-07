@@ -79,7 +79,8 @@ export default function App({ Component, pageProps }: AppProps) {
           styles={(theme) => ({
             main: { 
               backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : '#ECF8F6',
-              display: 'flex'
+              display: 'flex',
+              paddingTop: '3%'
              },
           })}
         >

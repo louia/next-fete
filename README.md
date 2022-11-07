@@ -9,3 +9,4 @@
 - [X] Fixer les vagues sur le front
 - [ ] Ajout de l'algo de scrapping pour les différents sites avec PlayWright
 - [ ] Fixer les types TS
+- [ ] Ajout du dark mode en fonction des preferences systèmes

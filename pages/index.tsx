@@ -1,5 +1,5 @@
 
-import { Container, Grid, Space, Stack, Text, Title } from '@mantine/core';
+import { Center, Grid, MediaQuery, Space, Stack, Text, Title } from '@mantine/core';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { ReactNode } from 'react';
 import FeteJour from '../components/feteDuJour';
@@ -63,32 +63,37 @@ interface Props {
 
 export default function Home({ cleanedFetes, cleanedFetesOfTheDay, ...props }: Props) {
   return (
-    <Container size="xl" style={{display: 'flex'}}>
-      <Grid justify={'space-between'} align={'center'} grow>
-        <Grid.Col span={5}>
-          <Stack spacing={'lg'}>
-            <Title
-              order={1}
-              variant="gradient"
-              gradient={{ from: 'emeraude', to: 'emeraude-light', deg: 280 }}
-            >
-              N'oubliez pas de souhaiter la fête de vos proches !
-            </Title>
-            <Stack spacing={'sm'}>
-              <Text>
-                Entrer les prénoms de vos proches afin de ne pas oublier leur fête.
-              </Text>
-              <Text>Un fichier d'événement sera alors téléchargé afin de d'ajouter dans votre calendrier numérique les fêtes de vos proches, cela permettra de recevoir une notification pour vous rappelez de leur souhaiter leur fête.
-              </Text>
+    <MediaQuery
+      query="(max-width: 730px)"
+      styles={{ paddingTop: '20vw !important' }}
+    >
+      <Center style={{ zIndex: 2, padding: '0 3%' }}>
+        <Grid justify={'space-between'} align={'center'} grow>
+          <Grid.Col span={5}>
+            <Stack spacing={'lg'}>
+              <Title
+                order={1}
+                variant="gradient"
+                gradient={{ from: 'emeraude', to: 'emeraude-light', deg: 280 }}
+              >
+                N'oubliez pas de souhaiter la fête de vos proches !
+              </Title>
+              <Stack spacing={'sm'}>
+                <Text>
+                  Entrer les prénoms de vos proches afin de ne pas oublier leur fête.
+                </Text>
+                <Text>Un fichier d'événement sera alors téléchargé afin de d'ajouter dans votre calendrier numérique les fêtes de vos proches, cela permettra de recevoir une notification pour vous rappelez de leur souhaiter leur fête.
+                </Text>
+              </Stack>
             </Stack>
-          </Stack>
-        </Grid.Col>
-      <Grid.Col span={7}>
-        <InputBox fetes={cleanedFetes} />
-        <Space h='md' />
-        <FeteJour fetesOfTheDay={cleanedFetesOfTheDay} />
-      </Grid.Col>
-    </Grid>
-    </Container>
+          </Grid.Col>
+          <Grid.Col span={7}>
+            <InputBox fetes={cleanedFetes} />
+            <Space h='md' />
+            <FeteJour fetesOfTheDay={cleanedFetesOfTheDay} />
+          </Grid.Col>
+        </Grid>
+      </Center>
+    </MediaQuery>
   )
 }
