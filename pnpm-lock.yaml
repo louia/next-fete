@@ -6,6 +6,7 @@ specifiers:
   '@mantine/core': ^5.6.4
   '@mantine/hooks': ^5.6.4
   '@mantine/next': ^5.6.4
+  '@playwright/test': ^1.27.1
   '@prisma/client': ^4.5.0
   '@types/node': 18.11.9
   '@types/react': 18.0.24
@@ -13,6 +14,7 @@ specifiers:
   framer-motion: '6'
   ics: ^2.41.0
   next: 13.0.1
+  playwright: ^1.27.1
   prisma: ^4.5.0
   react: 18.2.0
   react-dom: 18.2.0
@@ -31,10 +33,12 @@ dependencies:
   framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
   ics: 2.41.0
   next: 13.0.1_biqbaboplfbrettd7655fr4n2y
+  playwright: 1.27.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
 
 devDependencies:
+  '@playwright/test': 1.27.1
   '@types/node': 18.11.9
   prisma: 4.5.0
   ts-node: 10.9.1_cbe7ovvae6zqfnmtgctpgpys54
@@ -535,6 +539,15 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@playwright/test/1.27.1:
+    resolution: {integrity: sha512-mrL2q0an/7tVqniQQF6RBL2saskjljXzqNcCOVMUjRIgE6Y38nCNaP+Dc2FBW06bcpD3tqIws/HT9qiMHbNU0A==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      '@types/node': 18.11.9
+      playwright-core: 1.27.1
+    dev: true
 
   /@prisma/client/4.5.0_prisma@4.5.0:
     resolution: {integrity: sha512-B2cV0OPI1smhdYUxsJoLYQLoMlLH06MUxgFUWQnHodGMX98VRVXKmQE/9OcrTNkqtke5RC+YU24Szxd04tZA2g==}
@@ -1175,6 +1188,20 @@ packages:
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+    dev: false
+
+  /playwright-core/1.27.1:
+    resolution: {integrity: sha512-9EmeXDncC2Pmp/z+teoVYlvmPWUC6ejSSYZUln7YaP89Z6lpAaiaAnqroUt/BoLo8tn7WYShcfaCh+xofZa44Q==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  /playwright/1.27.1:
+    resolution: {integrity: sha512-xXYZ7m36yTtC+oFgqH0eTgullGztKSRMb4yuwLPl8IYSmgBM88QiB+3IWb1mRIC9/NNwcgbG0RwtFlg+EAFQHQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      playwright-core: 1.27.1
     dev: false
 
   /popmotion/11.0.3:

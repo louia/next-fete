@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import fete from '../public/feteByDate.json';
+import fete from '../scrapping/magicmaman/fete_magic_maman.json';
 
 const prisma = new PrismaClient();
 
@@ -13,9 +13,10 @@ async function main() {
         for (const fete of value) {
             inserts.push(prisma.fete.create({
                 data: {
-                    prenom: fete.pnom,
+                    prenom: fete.prenom,
                     createdAt: date,
-                    fete_religieuse: fete.majeur ? 1 : 0,
+                    fete_religieuse: 0,
+                    genre: fete.gender,
                     date: key.substring(0,5),
                 }
             }));

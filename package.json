@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "prisma db seed"
+    "seed": "prisma db seed",
+    "test": "pnpm dlx playwright test",
+    "scrap": "ts-node -O {\\\"module\\\":\\\"commonjs\\\"} scrapping/magicmaman/index.ts"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -24,10 +26,12 @@
     "framer-motion": "6",
     "ics": "^2.41.0",
     "next": "13.0.1",
+    "playwright": "^1.27.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.27.1",
     "@types/node": "18.11.9",
     "prisma": "^4.5.0",
     "ts-node": "^10.9.1",

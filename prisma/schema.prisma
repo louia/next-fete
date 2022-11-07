@@ -21,6 +21,7 @@ model fete {
   date            String
   prenom          String
   fete_religieuse Decimal?  @default(0)
+  genre           String?
   createdAt       String?
   demande         demande[]
 }
