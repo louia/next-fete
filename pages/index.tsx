@@ -5,9 +5,10 @@ import { ReactNode } from 'react';
 import FeteJour from '../components/feteDuJour';
 import InputBox from '../components/inputBox';
 
-export type Fete = Pick<Prisma.feteSelect, "date" | "id" | "prenom"> & {
-  value: Prisma.feteSelect['id'],
-  label: Prisma.feteSelect['prenom'],
+type PrismaFeteSelect = Prisma.feteGetPayload<{}>;
+export type Fete = Pick<PrismaFeteSelect, "date" | "id" | "prenom"> & {
+  value: PrismaFeteSelect['id'],
+  label: PrismaFeteSelect['prenom'],
   fete_religieuse: number
 }
 
@@ -58,7 +59,8 @@ export async function getServerSideProps() {
 
 interface Props {
   children?: ReactNode,
-  cleanedFetes: Fete[]
+  cleanedFetes: Fete[],
+  cleanedFetesOfTheDay: Fete[],
 }
 
 export default function Home({ cleanedFetes, cleanedFetesOfTheDay, ...props }: Props) {

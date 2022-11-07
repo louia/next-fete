@@ -1,4 +1,4 @@
-import { Button, Card, MultiSelect, Stack } from "@mantine/core";
+import { Button, Card, MultiSelect, SelectItem, Stack } from "@mantine/core";
 import * as ics from 'ics';
 import { EventAttributes } from 'ics';
 import { ReactNode, useEffect, useState } from "react";
@@ -11,13 +11,13 @@ interface Props {
 }
 
 export default function InputBox({ fetes }: Props) {
-  const [value, setValue] = useState<Fete['value'][]>([]);
+  const [value, setValue] = useState<string[]>([]);
   const [selectedNames, setSelectedNames] = useState<Fete[]>([]);
 
   useEffect(() => {
     const selectedNames = [];
     for (const id of value) {
-      const find = fetes.find((fete) => fete.value === id);
+      const find = fetes.find((fete) => fete.value == (id as unknown as number));
       if (find) {
         selectedNames.push(find);
       }
@@ -71,7 +71,7 @@ export default function InputBox({ fetes }: Props) {
         <MultiSelect
           value={value}
           onChange={setValue}
-          data={fetes}
+          data={fetes as unknown as SelectItem[]}
           label="Prénom"
           placeholder="Jean, Pierre, Lucas, Hugo"
           searchable

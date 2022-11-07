@@ -1,6 +1,13 @@
 import { Badge, Card, Group, Space, Text } from "@mantine/core";
-  
-export default function FeteJour({fetesOfTheDay}) {
+import { ReactNode } from "react";
+import { Fete } from "../pages";
+
+interface Props {
+    children?: ReactNode,
+    fetesOfTheDay: Fete[]
+}
+
+export default function FeteJour({ fetesOfTheDay }: Props) {
     const date = new Date();
     const formatedDate = new Intl.DateTimeFormat('fr-FR').format(date);
 
