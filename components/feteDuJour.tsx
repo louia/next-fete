@@ -1,5 +1,5 @@
 import { Badge, Card, Group, Space, Text } from "@mantine/core";
-
+  
 export default function FeteJour({fetesOfTheDay}) {
     const date = new Date();
     const formatedDate = new Intl.DateTimeFormat('fr-FR').format(date);

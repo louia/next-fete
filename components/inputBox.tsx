@@ -1,7 +1,9 @@
 import { Button, Card, MultiSelect, Stack } from "@mantine/core";
+import * as ics from 'ics';
+import { EventAttributes } from 'ics';
 import { ReactNode, useEffect, useState } from "react";
+import useDownloadCalendarFile from "../hooks/useDownloadCalendarFile";
 import { Fete } from "../pages";
-
 
 interface Props {
   children?: ReactNode,
@@ -10,13 +12,51 @@ interface Props {
 
 export default function InputBox({ fetes }: Props) {
   const [value, setValue] = useState<Fete['value'][]>([]);
+  const [selectedNames, setSelectedNames] = useState<Fete[]>([]);
 
   useEffect(() => {
+    const selectedNames = [];
     for (const id of value) {
       const find = fetes.find((fete) => fete.value === id);
-      console.log(id, find);
+      if (find) {
+        selectedNames.push(find);
+      }
     }
+    setSelectedNames(selectedNames);
   }, [value]);
+
+  function downloadIcs() {
+    const events = [] as EventAttributes[];
+    for (const fete of selectedNames) {
+      const [day, month] = fete?.date?.split('/');
+      const event = {
+        start: [Number(new Date().getFullYear()), Number(month), Number(day), 0, 0],
+        recurrenceRule: 'FREQ=YEARLY',
+        title: `Fête de ${fete.prenom}`,
+        // url: fete.lien,
+        description: `C'est la fête des ${fete.prenom} ! Pour plus d'informations, consultez ce lien : ${''}`,
+        categories: ['fete'],
+        alarms: [{
+          action: 'display',
+          description: 'Reminder',
+          trigger: {
+            hours: 5,
+            minutes: 30,
+            before: true,
+          },
+        }],
+      } as EventAttributes;
+      events.push(event);
+    }
+    const { error, value } = ics.createEvents(events);
+    if (error) {
+      console.error(error);
+      return;
+    }
+    if (value) {
+      useDownloadCalendarFile(value, 'fete.ics');
+    }
+  }
 
 
   return (
@@ -43,7 +83,7 @@ export default function InputBox({ fetes }: Props) {
           clearable
           aria-label="Prénom"
         />
-        <Button color="sand.5" radius="lg" size="lg">
+        <Button color="sand.5" radius="lg" size="lg" disabled={value.length === 0} onClick={downloadIcs}>
           Valider
         </Button>
       </Stack>
