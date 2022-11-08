@@ -6,8 +6,9 @@ import FeteJour from '../components/feteDuJour';
 import InputBox from '../components/inputBox';
 
 type PrismaFeteSelect = Prisma.feteGetPayload<{}>;
-export type Fete = Pick<PrismaFeteSelect, "date" | "id" | "prenom"> & {
-  value: PrismaFeteSelect['id'],
+export type Fete = Pick<PrismaFeteSelect, "date"| "prenom"> & {
+  id: string;
+  value: string,
   label: PrismaFeteSelect['prenom'],
   fete_religieuse: number
 }
