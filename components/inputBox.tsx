@@ -17,7 +17,7 @@ export default function InputBox({ fetes }: Props) {
   useEffect(() => {
     const selectedNames = [];
     for (const id of value) {
-      const find = fetes.find((fete) => fete.value == (id as unknown as number));
+      const find = fetes.find((fete) => fete.value === id);
       if (find) {
         selectedNames.push(find);
       }
@@ -28,7 +28,9 @@ export default function InputBox({ fetes }: Props) {
   function downloadIcs() {
     const events = [] as EventAttributes[];
     for (const fete of selectedNames) {
-      const [day, month] = fete?.date?.split('/');
+      const dateSplit = fete?.date?.split('/');
+      if(!dateSplit) return;
+      const [day, month] = dateSplit;
       const event = {
         start: [Number(new Date().getFullYear()), Number(month), Number(day), 0, 0],
         recurrenceRule: 'FREQ=YEARLY',
