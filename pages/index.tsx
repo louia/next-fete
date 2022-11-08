@@ -28,8 +28,8 @@ export async function getServerSideProps() {
   });
   const cleanedFetes = allFetes.map((fete) => ({
     ...fete,
-    fete_religieuse: fete.fete_religieuse?.toNumber(),
-    value: fete.id,
+    id: fete.id.toString(),
+    value: fete.id.toString(),
     label: fete.prenom,
   }));
 
@@ -51,7 +51,7 @@ export async function getServerSideProps() {
   });
   const cleanedFetesOfTheDay = fetesOfTheDay.map((fete) => ({
     ...fete,
-    fete_religieuse: fete.fete_religieuse?.toNumber(),
+    id: fete.id.toString(),
   }));
 
   return { props: { cleanedFetes, cleanedFetesOfTheDay } }

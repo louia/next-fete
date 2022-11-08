@@ -8,21 +8,18 @@ async function main() {
 
     await prisma.fete.deleteMany({});
 
-    const inserts = [];
+    const fetes = [];
     for (const [key, value] of Object.entries(fete)) {
         for (const fete of value) {
-            inserts.push(prisma.fete.create({
-                data: {
-                    prenom: fete.prenom,
-                    createdAt: date,
-                    fete_religieuse: 0,
-                    genre: fete.gender,
-                    date: key.substring(0,5),
-                }
-            }));
+            fetes.push({
+                prenom: fete.prenom,
+                fete_religieuse: false,
+                genre: fete.gender,
+                date: key.substring(0, 5),
+            });
         }
     }
-    await prisma.$transaction(inserts);
+    await prisma.fete.createMany({ data: fetes });
 }
 
 
