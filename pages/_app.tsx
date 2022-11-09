@@ -31,7 +31,7 @@ export default function App({ Component, pageProps, ...props }: AppProps & { col
         <meta property="og:url" content="https://next-fete.vercel.app/" />
         <meta property="og:description" content="N'oubliez plus la fête de vos proches !" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="og.img" />
+        <meta property="og:image" content="og.jpg" />
       </Head>
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
         <MantineProvider
