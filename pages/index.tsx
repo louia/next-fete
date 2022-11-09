@@ -1,12 +1,14 @@
 
-import { Center, Grid, MediaQuery, Space, Stack, Text, Title } from '@mantine/core';
+import { Center, Grid, MediaQuery, Space, Stack } from '@mantine/core';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { ReactNode } from 'react';
 import FeteJour from '../components/feteDuJour';
 import InputBox from '../components/inputBox';
+import MaintTitle from '../components/MainTitle';
+import Subtitle from '../components/Subtitle';
 
 type PrismaFeteSelect = Prisma.feteGetPayload<{}>;
-export type Fete = Pick<PrismaFeteSelect, "date"| "prenom"> & {
+export type Fete = Pick<PrismaFeteSelect, "date" | "prenom" | "genre"> & {
   id: string;
   value: string,
   label: PrismaFeteSelect['prenom'],
@@ -44,7 +46,8 @@ export async function getServerSideProps() {
     select: {
       prenom: true,
       fete_religieuse: true,
-      id: true
+      id: true,
+      genre: true
     },
     orderBy: {
       prenom: 'asc',
@@ -74,20 +77,8 @@ export default function Home({ cleanedFetes, cleanedFetesOfTheDay, ...props }: P
         <Grid justify={'space-between'} align={'center'} grow>
           <Grid.Col span={5}>
             <Stack spacing={'lg'}>
-              <Title
-                order={1}
-                variant="gradient"
-                gradient={{ from: 'emeraude', to: 'emeraude-light', deg: 280 }}
-              >
-                N'oubliez pas de souhaiter la fête de vos proches !
-              </Title>
-              <Stack spacing={'sm'}>
-                <Text>
-                  Entrer les prénoms de vos proches afin de ne pas oublier leur fête.
-                </Text>
-                <Text>Un fichier d'événement sera alors téléchargé afin de d'ajouter dans votre calendrier numérique les fêtes de vos proches, cela permettra de recevoir une notification pour vous rappelez de leur souhaiter leur fête.
-                </Text>
-              </Stack>
+              <MaintTitle />
+              <Subtitle />
             </Stack>
           </Grid.Col>
           <Grid.Col span={7}>
