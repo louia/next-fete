@@ -4,7 +4,7 @@ import { ColorSchemeToggle } from "./ColorSchemeToggle";
 
 export default function FooterLink() {
 
-    return (
+    return (    
         <Footer height={60} p="md" >
             <Group>
                 <ColorSchemeToggle />
