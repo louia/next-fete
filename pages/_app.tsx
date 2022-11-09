@@ -19,11 +19,13 @@ export default function App({ Component, pageProps, ...props }: AppProps & { col
   return (
     <>
       <Head>
-        <title>Fête</title>
+        <title>Souhaitez la fête de vos proches</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <meta property="og:title" content="Souhaitez la fête de vos proches" />
+        <link rel="icon" href="/favicon.png" />
+
+
       </Head>
-
-
       <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider
         withGlobalStyles
@@ -108,6 +110,6 @@ App.getInitialProps = async (appContext: AppContext) => {
   const appProps = await NextApp.getInitialProps(appContext);
   return {
     ...appProps,
-    colorScheme: getCookie('mantine-color-scheme', appContext.ctx) || 'dark',
+    colorScheme: getCookie('mantine-color-scheme', appContext.ctx) || 'light',
   };
 };
