@@ -1,11 +1,22 @@
-import { AppShell, MantineProvider } from '@mantine/core';
-import type { AppProps } from 'next/app';
+import { AppShell, ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
+import { getCookie, setCookie } from 'cookies-next';
+import type { AppContext, AppProps } from 'next/app';
+import NextApp from 'next/app';
 import Head from 'next/head';
+import { useState } from 'react';
 import FooterLink from '../components/footerLink';
 import Waves from '../components/waves';
 import '../styles/globals.css';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, ...props }: AppProps & { colorScheme: ColorScheme }) {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>(props.colorScheme);
+
+  const toggleColorScheme = (value?: ColorScheme) => {
+    const nextColorScheme = value || (colorScheme === 'dark' ? 'light' : 'dark');
+    setColorScheme(nextColorScheme);
+    setCookie('mantine-color-scheme', nextColorScheme, { maxAge: 60 * 60 * 24 * 30 });
+  };
+  
   return (
     <>
       <Head>
@@ -14,11 +25,12 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
 
 
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
         theme={{
-          colorScheme: 'light',
+          colorScheme,
           colors: {
             'emeraude': [
               '#e1fcfa',
@@ -71,7 +83,6 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         }}
       >
-
         <AppShell
           footer={
             <FooterLink />
@@ -88,7 +99,16 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </AppShell>
       </MantineProvider>
+      </ColorSchemeProvider>
 
     </>
   )
 }
+
+App.getInitialProps = async (appContext: AppContext) => {
+  const appProps = await NextApp.getInitialProps(appContext);
+  return {
+    ...appProps,
+    colorScheme: getCookie('mantine-color-scheme', appContext.ctx) || 'dark',
+  };
+};
