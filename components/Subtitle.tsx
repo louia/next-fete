@@ -7,7 +7,7 @@ export default function Subtitle() {
                 <Text>
                     Entrer les prénoms de vos proches afin de ne pas oublier leur fête.
                 </Text>
-                <Text>Un fichier d'événement sera alors téléchargé afin de d'ajouter dans votre calendrier numérique les fêtes de vos proches, cela permettra de recevoir une notification pour vous rappelez de leur souhaiter leur fête.
+                <Text>Un fichier d'événement sera alors téléchargé afin de l'ajouter dans votre calendrier numérique. Cela permettra de recevoir une notification pour vous rappelez de leur souhaiter leur fête.
                 </Text>
             </Stack>
         </>
