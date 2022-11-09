@@ -67,7 +67,6 @@ async function getFetesByDate(month: string, day: string, context: any): Promise
         console.log(day, month);
 
         const res = await getFetesByDate(month, day, context);
-        console.log(res);
         
         fetes[dateFormated] = res;
         await fs.writeFile('fete_magic_maman.json', JSON.stringify(fetes, null, 2));

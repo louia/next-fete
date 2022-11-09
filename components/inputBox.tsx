@@ -32,7 +32,8 @@ export default function InputBox({ fetes }: Props) {
       if(!dateSplit) return;
       const [day, month] = dateSplit;
       const event = {
-        start: [Number(new Date().getFullYear()), Number(month), Number(day), 0, 0],
+        start: [Number(new Date().getFullYear()), Number(month), Number(day)],
+        end: [Number(new Date().getFullYear()), Number(month), Number(day) + 1],
         recurrenceRule: 'FREQ=YEARLY',
         title: `Fête de ${fete.prenom}`,
         // url: fete.lien,
