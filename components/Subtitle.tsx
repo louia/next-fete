@@ -5,9 +5,9 @@ export default function Subtitle() {
         <>
             <Stack spacing={'sm'}>
                 <Text>
-                    Entrer les prénoms de vos proches afin de ne pas oublier leur fête.
+                    Inscrivez le nom des personnes que vous aimez afin de ne pas oublier leur fête.
                 </Text>
-                <Text>Un fichier d'événement sera alors téléchargé afin de l'ajouter dans votre calendrier numérique. Cela permettra de recevoir une notification pour vous rappelez de leur souhaiter leur fête.
+                <Text>Un fichier d'événement sera téléchargé afin de l'ajouter dans votre calendrier numérique. Cela permettra de recevoir une notification pour vous rappeler   de leur souhaiter leur fête.
                 </Text>
             </Stack>
         </>
