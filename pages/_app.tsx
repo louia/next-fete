@@ -1,4 +1,5 @@
 import { AppShell, ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
+import { Analytics } from '@vercel/analytics/react';
 import { getCookie, setCookie } from 'cookies-next';
 import type { AppContext, AppProps } from 'next/app';
 import NextApp from 'next/app';
@@ -7,6 +8,7 @@ import { useState } from 'react';
 import FooterLink from '../components/FooterLink';
 import Waves from '../components/waves';
 import '../styles/globals.css';
+
 export default function App({ Component, pageProps, ...props }: AppProps & { colorScheme: ColorScheme }) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>(props.colorScheme);
 
@@ -108,7 +110,7 @@ export default function App({ Component, pageProps, ...props }: AppProps & { col
           </AppShell>
         </MantineProvider>
       </ColorSchemeProvider>
-
+      <Analytics />
     </>
   )
 }
