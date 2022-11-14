@@ -5,7 +5,7 @@ import type { AppContext, AppProps } from 'next/app';
 import NextApp from 'next/app';
 import Head from 'next/head';
 import { useState } from 'react';
-import FooterLink from '../components/FooterLink';
+import FooterLink from '../components/footerLink';
 import Waves from '../components/waves';
 import '../styles/globals.css';
 
