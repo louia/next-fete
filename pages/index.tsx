@@ -16,25 +16,6 @@ export type Fete = Pick<PrismaFeteSelect, "date" | "prenom" | "genre"> & {
 
 export async function getServerSideProps() {
   const prisma = new PrismaClient();
-
-  const allFetes = await prisma.fete.findMany({
-    select: {
-      date: true,
-      fete_religieuse: false,
-      id: true,
-      prenom: true
-    },
-    orderBy: {
-      prenom: 'asc',
-    }
-  });
-  const cleanedFetes = allFetes.map((fete) => ({
-    ...fete,
-    id: fete.id.toString(),
-    value: fete.id.toString(),
-    label: fete.prenom,
-  }));
-
   const date = new Date();
   const formatedDate = new Intl.DateTimeFormat('fr-FR').format(date).substring(0, 5);
 
@@ -56,16 +37,15 @@ export async function getServerSideProps() {
     id: fete.id.toString(),
   }));
 
-  return { props: { cleanedFetes, cleanedFetesOfTheDay } }
+  return { props: { cleanedFetesOfTheDay } }
 }
 
 interface Props {
   children?: ReactNode,
-  cleanedFetes: Fete[],
   cleanedFetesOfTheDay: Fete[],
 }
 
-export default function Home({ cleanedFetes, cleanedFetesOfTheDay, ...props }: Props) {
+export default function Home({ cleanedFetesOfTheDay, ...props }: Props) {
   return (
     <MediaQuery
       query="(max-width: 730px)"
@@ -80,7 +60,7 @@ export default function Home({ cleanedFetes, cleanedFetesOfTheDay, ...props }: P
             </Stack>
           </Grid.Col>
           <Grid.Col span={7}>
-            <InputLayout fetes={cleanedFetes} />
+            <InputLayout />
             <Space h='md' />
             <FeteJour fetesOfTheDay={cleanedFetesOfTheDay} />
           </Grid.Col>
