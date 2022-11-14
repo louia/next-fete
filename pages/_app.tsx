@@ -4,6 +4,7 @@ import { getCookie, setCookie } from 'cookies-next';
 import type { AppContext, AppProps } from 'next/app';
 import NextApp from 'next/app';
 import Head from 'next/head';
+import Script from 'next/script';
 import { useState } from 'react';
 import FooterLink from '../components/footerLink';
 import Waves from '../components/waves';
@@ -106,6 +107,16 @@ export default function App({ Component, pageProps, ...props }: AppProps & { col
             })}
           >
             <Waves />
+            <Script
+              strategy='afterInteractive'
+              src="https://cdn.jsdelivr.net/gh/greentfrapp/pocoloco@minigl/minigl.js"
+              id='gradient'
+              onLoad={() => {
+                console.log('Script has loaded');
+                var gradient = new Gradient();
+                gradient.initGradient("#canvas");
+              }}
+            />
             <Component {...pageProps} />
           </AppShell>
         </MantineProvider>
