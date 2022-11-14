@@ -4,7 +4,7 @@ import type { AppContext, AppProps } from 'next/app';
 import NextApp from 'next/app';
 import Head from 'next/head';
 import { useState } from 'react';
-import FooterLink from '../components/footerLink';
+import FooterLink from '../components/FooterLink';
 import Waves from '../components/waves';
 import '../styles/globals.css';
 export default function App({ Component, pageProps, ...props }: AppProps & { colorScheme: ColorScheme }) {
