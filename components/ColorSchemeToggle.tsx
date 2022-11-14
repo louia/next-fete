@@ -13,6 +13,7 @@ export function ColorSchemeToggle() {
             theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
           color: theme.colorScheme === 'dark' ? theme.colors.yellow[4] : theme.colors.blue[6],
         })}
+        aria-label='Boutton de changement de thème de couleur'
       >
         {colorScheme === 'dark' ? (
           <IconSun size={20} stroke={1.5} />
