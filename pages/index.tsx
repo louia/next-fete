@@ -3,7 +3,7 @@ import { Center, Grid, MediaQuery, Space, Stack } from '@mantine/core';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { ReactNode } from 'react';
 import FeteJour from '../components/feteDuJour';
-import InputBox from '../components/inputBox';
+import InputLayout from '../components/InputFete/InputLayout';
 import MaintTitle from '../components/MainTitle';
 import Subtitle from '../components/Subtitle';
 
@@ -12,7 +12,6 @@ export type Fete = Pick<PrismaFeteSelect, "date" | "prenom" | "genre"> & {
   id: string;
   value: string,
   label: PrismaFeteSelect['prenom'],
-  fete_religieuse: number
 }
 
 export async function getServerSideProps() {
@@ -21,7 +20,7 @@ export async function getServerSideProps() {
   const allFetes = await prisma.fete.findMany({
     select: {
       date: true,
-      fete_religieuse: true,
+      fete_religieuse: false,
       id: true,
       prenom: true
     },
@@ -45,7 +44,6 @@ export async function getServerSideProps() {
     },
     select: {
       prenom: true,
-      fete_religieuse: true,
       id: true,
       genre: true
     },
@@ -82,7 +80,7 @@ export default function Home({ cleanedFetes, cleanedFetesOfTheDay, ...props }: P
             </Stack>
           </Grid.Col>
           <Grid.Col span={7}>
-            <InputBox fetes={cleanedFetes} />
+            <InputLayout fetes={cleanedFetes} />
             <Space h='md' />
             <FeteJour fetesOfTheDay={cleanedFetesOfTheDay} />
           </Grid.Col>
