@@ -1,4 +1,4 @@
-import { AppShell, ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
+import { AppShell, Button, ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core';
 import { Analytics } from '@vercel/analytics/react';
 import { getCookie, setCookie } from 'cookies-next';
 import type { AppContext, AppProps } from 'next/app';
@@ -106,6 +106,7 @@ export default function App({ Component, pageProps, ...props }: AppProps & { col
             })}
           >
             <Waves />
+            <Button onClick={() => window.open('https://google.fr', '_system')}>Google</Button>
             <Component {...pageProps} />
           </AppShell>
         </MantineProvider>
