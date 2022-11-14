@@ -1,10 +1,10 @@
 import { Badge, Card, Group, Space, Text } from "@mantine/core";
 import { ReactNode } from "react";
-import { Fete } from "../pages";
+import { FeteOfTheDay } from "../pages/api/fete/day";
 
 interface Props {
     children?: ReactNode,
-    fetesOfTheDay: Fete[]
+    fetesOfTheDay: FeteOfTheDay[]
 }
 
 export default function FeteJour({ fetesOfTheDay }: Props) {
