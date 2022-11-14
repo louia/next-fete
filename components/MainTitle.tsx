@@ -14,12 +14,13 @@ export default function MaintTitle() {
                 <Image
                     alt="Icone confetti"
                     width={32}
+                    height={32}
                     fit="contain"
                     src="/confetti.svg"
                     style={{
                         display: 'inline-block',
                         width: '32px',
-                        marginLeft: '5%'
+                        marginLeft: '3%'
                     }}
                 />
             </Title>
