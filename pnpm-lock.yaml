@@ -12,6 +12,7 @@ specifiers:
   '@types/node': 18.11.9
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
+  '@vercel/analytics': ^0.1.4
   cookies-next: ^2.1.1
   framer-motion: '6'
   ics: ^2.41.0
@@ -33,6 +34,7 @@ dependencies:
   '@tabler/icons': 1.110.0_biqbaboplfbrettd7655fr4n2y
   '@types/react': 18.0.24
   '@types/react-dom': 18.0.8
+  '@vercel/analytics': 0.1.4_react@18.2.0
   cookies-next: 2.1.1
   framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
   ics: 2.41.0
@@ -764,6 +766,14 @@ packages:
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: false
+
+  /@vercel/analytics/0.1.4_react@18.2.0:
+    resolution: {integrity: sha512-6xI1kozfgigwmDTQCrtj+m0yQnzhLGa/l0yE8BjTbUQ2vF9b88CEXF3dXjZl48ESfjssCur3FkK3jOwZm4emrw==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /acorn-walk/8.2.0:
