@@ -16,7 +16,8 @@ export default function ValidButton({ selectedFetes, setSelectedFetes }: Props) 
     const ics = createCalendarEvents(selectedFetes);
     if (ics) {
       downloadCalendarFile(ics, 'fete.ics');
-      setPrenomsStorage(selectedFetes.map(fete => fete.id))
+      const ids = selectedFetes.map(fete => fete.id);
+      setPrenomsStorage([...new Set(prenomsStorage.concat(ids))]);
     }
   }
 
