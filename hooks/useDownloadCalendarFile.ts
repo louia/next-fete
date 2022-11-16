@@ -3,8 +3,12 @@ export default function useDownloadCalendarFile(file: string, fileName: string) 
     const blobFile = new Blob([file], {
         type: 'text/calendar',
     });
+    element.className = "download";
+    element.download = "file-" + new Date().getTime();
     element.href = URL.createObjectURL(blobFile);
     element.download = fileName;
     document.body.appendChild(element);
-    element.click();
+    element.click();    
+    element.parentElement?.removeChild(element);
+
 }
