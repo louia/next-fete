@@ -1,17 +1,17 @@
 import { Button } from "@mantine/core";
+import { useLocalStorage } from "@mantine/hooks";
 import { useEffect, useState } from "react";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { Fete } from "../../pages";
+import { Fete } from "../../../pages";
 
 interface Props {
   setSelectedFetes: (fete: Fete[]) => void,
   selectedFetes: Fete[]
 }
 
-export default function ValidButton({ selectedFetes, setSelectedFetes }: Props) {
-  const [prenomsStorage, setPrenomsStorage] = useLocalStorage('prenoms', []);
+export default function ValidButtonWebView({ selectedFetes, setSelectedFetes }: Props) {
+  const [prenomsStorage, setPrenomsStorage] = useLocalStorage<string[]>({ key: 'prenoms', defaultValue: [] });
 
-  const [ids, setIds] = useState<string[] | undefined>(undefined);
+  const [ids, setIds] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (selectedFetes) {
@@ -23,13 +23,8 @@ export default function ValidButton({ selectedFetes, setSelectedFetes }: Props) 
   }, [selectedFetes])
 
   function clickButton(e: React.MouseEvent<HTMLElement>) {
-    setPrenomsStorage(selectedFetes.map(fete => fete.id));
-    console.log('ok');
-    
-    
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  // e.nativeEvent.stopImmediatePropagation();
+    const ids = selectedFetes.map(fete => fete.id);
+    setPrenomsStorage([...new Set(prenomsStorage.concat(ids))]);
   }
 
   const button = (

@@ -1,4 +1,4 @@
-export default function useDownloadCalendarFile(file: string, fileName: string) {
+export default function downloadCalendarFile(file: string, fileName: string) {
     const element = document.createElement('a');
     const blobFile = new Blob([file], {
         type: 'text/calendar',
