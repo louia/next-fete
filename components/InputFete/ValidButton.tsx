@@ -1,6 +1,7 @@
 import { Button } from "@mantine/core";
 import * as ics from 'ics';
 import { EventAttributes } from "ics";
+import { useEffect, useState } from "react";
 import useDownloadCalendarFile from "../../hooks/useDownloadCalendarFile";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { Fete } from "../../pages";
@@ -11,7 +12,26 @@ interface Props {
 }
 
 export default function ValidButton({ selectedFetes, setSelectedFetes }: Props) {
-  const [prenomsStorage, setPrenomsStorage] = useLocalStorage('prenoms', []);  
+  const [prenomsStorage, setPrenomsStorage] = useLocalStorage('prenoms', []);
+  const [isIframe, setIsIframe] = useState<boolean>(false);
+  function isInWebView() {
+    var userAgent = window.navigator.userAgent.toLowerCase(),
+      safari = /safari/.test(userAgent),
+      ios = /iphone|ipod|ipad/.test(userAgent);
+
+    if (ios) {
+      return !safari;
+    }
+
+    return userAgent.includes('wv');
+  }
+
+  useEffect(() => {
+    if (isInWebView()) {
+      setIsIframe(true);
+    }
+  }, [])
+
 
   function downloadIcs() {
     const events = [] as EventAttributes[];
@@ -46,13 +66,15 @@ export default function ValidButton({ selectedFetes, setSelectedFetes }: Props) 
     }
     if (value) {
       useDownloadCalendarFile(value, 'fete.ics');
-      setPrenomsStorage(selectedFetes.map(fete => fete.id))      
+      setPrenomsStorage(selectedFetes.map(fete => fete.id))
     }
   }
 
   return (
-    <Button color="sand.5" radius="lg" size="lg" disabled={selectedFetes.length === 0} onClick={downloadIcs}>
-      Valider
-    </Button>
+    <>
+      <Button color="sand.5" radius="lg" size="lg" disabled={selectedFetes.length === 0} onClick={downloadIcs}>
+        Valider
+      </Button>
+    </>
   );
 }
