@@ -1,5 +1,4 @@
 import { Card, Skeleton, Stack } from "@mantine/core";
-import { useLocalStorage } from "@mantine/hooks";
 import { useState } from "react";
 import useSWR from "swr";
 import useWebView from "../../hooks/useWebView";
@@ -10,8 +9,6 @@ import { default as ValidButton, default as ValidButtonWebView } from "./ValidBu
 export default function InputLayout() {
   const [selectedFetes, setSelectedFetes] = useState<Fete[]>([]);
   const isWebView = useWebView();
-  const [prenomsStorage, setPrenomsStorage] = useLocalStorage<string[]>({ key: 'prenoms', defaultValue: [] });
-  
   const fetcher = (input: RequestInfo | URL, init?: RequestInit) => fetch(input, init).then(res => res.json())
 
   const { data, error } = useSWR('/api/fete', fetcher);
@@ -28,7 +25,6 @@ export default function InputLayout() {
       minHeight: '164px'
     })}
     >
-      {prenomsStorage}
       <Stack>
         {
           isLoading &&
