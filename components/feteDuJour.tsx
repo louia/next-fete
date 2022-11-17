@@ -27,9 +27,9 @@ export default function FeteJour({ fetesOfTheDay }: Props) {
                     fetesOfTheDay.map((fete) => {
                         let gradient;
                         if (fete.genre === 'F') {
-                            gradient = { from: '#ed6ea0', to: '#ec8c69', deg: 35 };
+                            gradient = { from: '#e52d27', to: '#b31217' };
                         } else if (fete.genre === 'H') {
-                            gradient = { from: 'indigo', to: 'cyan' };
+                            gradient = { from: '#1488CC', to: '#2B32B2' };
                         }
                         return (<Badge variant="gradient" gradient={gradient} key={fete.id} size='lg'>{fete.prenom}</Badge>)
                     })
