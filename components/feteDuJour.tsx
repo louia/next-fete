@@ -25,11 +25,13 @@ export default function FeteJour({ fetesOfTheDay }: Props) {
             <Group spacing="xs">
                 {
                     fetesOfTheDay.map((fete) => {
+                        let gradient;
                         if (fete.genre === 'F') {
-                            return (<Badge key={fete.id} variant="gradient" gradient={{ from: '#ed6ea0', to: '#ec8c69', deg: 35 }}>{fete.prenom}</Badge>)
+                            gradient = { from: '#ed6ea0', to: '#ec8c69', deg: 35 };
                         } else if (fete.genre === 'H') {
-                            return (<Badge variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }} key={fete.id}>{fete.prenom}</Badge>)
+                            gradient = { from: 'indigo', to: 'cyan' };
                         }
+                        return (<Badge variant="gradient" gradient={gradient} key={fete.id} size='lg'>{fete.prenom}</Badge>)
                     })
                 }
             </Group>
