@@ -1,5 +1,5 @@
 
-import { Center, Grid, MediaQuery, Space, Stack } from '@mantine/core';
+import { Button, Center, Grid, MediaQuery, Space, Stack } from '@mantine/core';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { ReactNode } from 'react';
 import FeteJour from '../components/feteDuJour';
