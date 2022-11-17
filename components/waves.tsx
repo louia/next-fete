@@ -12,8 +12,9 @@ export default function Waves() {
               src="https://cdn.jsdelivr.net/gh/greentfrapp/pocoloco@minigl/minigl.js"
               id='gradient'
               onLoad={() => {
-                // var gradient = new Gradient();
-                // gradient.initGradient("#canvas");
+                // @ts-ignore
+                var gradient = new Gradient();
+                gradient.initGradient("#canvas");
               }}
             />
         </>
