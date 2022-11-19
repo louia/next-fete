@@ -16,9 +16,8 @@ export default function createCalendarEvents(selectedFetes: Fete[]|{
         start: [Number(new Date().getFullYear()), Number(month), Number(day)],
         end: [Number(new Date().getFullYear()), Number(month), Number(day) + 1],
         recurrenceRule: 'FREQ=YEARLY',
-        title: `Fête de ${fete.prenom}`,
-        // url: fete.lien,
-        description: `C'est la fête des ${fete.prenom} (${fete.genre}) ! Pour plus d'informations, consultez ce lien : ${''}`,
+        title: `Fête des ${fete.prenom}`,
+        description: `C'est la fête des ${fete.prenom} (${fete.genre}) ! 🎉🎊`,
         categories: ['fete'],
         alarms: [{
           action: 'display',
